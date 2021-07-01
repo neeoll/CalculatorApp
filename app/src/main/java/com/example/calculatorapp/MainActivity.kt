@@ -8,6 +8,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 
+enum class CharType {
+    NUMBER,
+    OPERAND
+}
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,13 +35,13 @@ class MainActivity : AppCompatActivity() {
 
         numberList.forEach { button: TextView ->
              button.setOnClickListener {
-                appendString(button.text as String)
+                testFun(button.text as String, CharType.NUMBER)
              }
         }
 
         operatorList.forEach { button: TextView ->
             button.setOnClickListener {
-                evaluateExpression(button.text as String)
+                testFun(button.text as String, CharType.OPERAND)
             }
         }
 
@@ -62,50 +66,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun appendString(string: String) {
-        if (calcResult.text == "0" || !hasTextBeenEntered) {
-            calcResult.text = ""
-            calcResult.append(string)
-        } else {
-            calcResult.append(string)
+    private fun testFun(string: String, charType: CharType) {
+        if (charType == CharType.NUMBER) {
+            if (calcResult.text == "0" || !hasTextBeenEntered) {
+                calcResult.text = ""
+                calcResult.append(string)
+            } else {
+                calcResult.append(string)
+            }
+
+            hasTextBeenEntered = true
         }
+        else if (charType == CharType.OPERAND) {
+            if (calcResult.text.isEmpty()) { return }
 
-        hasTextBeenEntered = true
-    }
-
-    private fun evaluateExpression(string: String) {
-        if (calcResult.text.isEmpty()) { return }
-
-        calcExpression.text = calcResult.text.toString()
-        calcExpression.append(" ")
-        calcExpression.append(string)
-        calcExpression.append(" ")
-        hasTextBeenEntered = false
-        lastOperationDone= ""
+            calcExpression.text = calcResult.text.toString()
+            calcExpression.append(" ")
+            calcExpression.append(string)
+            calcExpression.append(" ")
+            hasTextBeenEntered = false
+            lastOperationDone= ""
+        }
     }
 
     private fun solveExpression() {
-        var text: String
-        var result: Double
-
         if (lastOperationDone == "") {
             calcExpression.append(calcResult.text.toString())
-
-            lastOperationDone = calcExpression.text.toString().substringAfter(' ')
-            text = removeSpaces(calcExpression.text.toString())
-
-            result =  solveExpression(text)
         } else {
             calcExpression.text = calcResult.text.toString()
             calcExpression.append(" ")
             calcExpression.append(lastOperationDone)
-
-            lastOperationDone = calcExpression.text.toString().substringAfter(' ')
-            text = removeSpaces(calcExpression.text.toString())
-
-            result =  solveExpression(text)
         }
 
+        lastOperationDone = calcExpression.text.toString().substringAfter(' ')
+
+        val text = removeSpaces(calcExpression.text.toString())
+        val result =  solveExpression(text)
         val longResult = result.toLong()
 
         if (result == longResult.toDouble()) {
@@ -128,8 +124,7 @@ class MainActivity : AppCompatActivity() {
         return text
     }
 
-    fun String.endsWithMulti(vararg chars: Char): Boolean
-    {
+    fun String.endsWithMulti(vararg chars: Char): Boolean {
         return chars.any {
             endsWith(it)
         }
