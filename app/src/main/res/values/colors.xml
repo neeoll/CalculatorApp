@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="operationButton">#FF9933</color>
     <color name="operationButtonPressed">#FF8000</color>
+    <color name="extraOperationButton">#202020</color>
+    <color name="extraOperationButtonPressed">#101010</color>
     <color name="numberButton">#404040</color>
     <color name="numberButtonPressed">#202020</color>
     <color name="textControlButton">#A0A0A0</color>

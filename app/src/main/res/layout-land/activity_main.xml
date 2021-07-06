@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" /> <!-- Text Ceiling -->
+        app:layout_constraintGuide_percent="0.05" /> <!-- Text Ceiling -->
     <LinearLayout
         android:id="@+id/textFields"
         android:layout_width="match_parent"
@@ -54,9 +54,10 @@
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@id/seven_to_div"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_ceiling">
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling"
+        android:background="@android:color/transparent">
         <TextView
             android:id="@+id/btn_lparen"
             style="@style/TextControlButton"
@@ -81,7 +82,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@id/four_to_mul"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lparen_to_clr">
         <TextView
@@ -108,7 +109,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@id/one_to_sub"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/seven_to_div">
         <TextView
@@ -135,7 +136,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@id/zero_to_add"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/four_to_mul">
         <TextView
@@ -162,7 +163,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/one_to_sub">
         <TextView
@@ -182,4 +183,122 @@
             style="@style/OperationButton"
             android:text="+" />
     </LinearLayout> <!-- Zero to Add -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_wall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.42" /> <!-- Button Wall -->
+    <LinearLayout
+        android:id="@+id/raddeg_to_factorial"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/inv_to_ln"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling">
+        <TextView
+            android:id="@+id/btn_raddeg"
+            style="@style/ExtraOperationButton"
+            android:layout_weight="2.05"
+            android:text="rad | deg" />
+        <TextView
+            android:id="@+id/btn_fact"
+            style="@style/ExtraOperationButton"
+            android:text="x!" />
+    </LinearLayout> <!-- Rad/Deg to Factorial -->
+    <LinearLayout
+        android:id="@+id/inv_to_ln"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pi_to_log"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/raddeg_to_factorial">
+        <TextView
+            android:id="@+id/btn_inv"
+            style="@style/ExtraOperationButton"
+            android:text="Inv" />
+        <TextView
+            android:id="@+id/btn_sin"
+            style="@style/ExtraOperationButton"
+            android:text="sin" />
+        <TextView
+            android:id="@+id/btn_ln"
+            style="@style/ExtraOperationButton"
+            android:text="ln" />
+    </LinearLayout> <!-- Inv to Ln -->
+    <LinearLayout
+        android:id="@+id/pi_to_log"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/e_to_root"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/inv_to_ln">
+        <TextView
+            android:id="@+id/btn_pi"
+            style="@style/ExtraOperationButton"
+            android:text="@string/pi" />
+        <TextView
+            android:id="@+id/btn_cos"
+            style="@style/ExtraOperationButton"
+            android:text="cos" />
+        <TextView
+            android:id="@+id/btn_log"
+            style="@style/ExtraOperationButton"
+            android:text="log" />
+    </LinearLayout> <!-- Pi to Log -->
+    <LinearLayout
+        android:id="@+id/e_to_root"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ans_to_pwr"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/pi_to_log">
+        <TextView
+            android:id="@+id/btn_e"
+            style="@style/ExtraOperationButton"
+            android:text="e" />
+        <TextView
+            android:id="@+id/btn_tan"
+            style="@style/ExtraOperationButton"
+            android:text="tan" />
+        <TextView
+            android:id="@+id/btn_sqrt"
+            style="@style/ExtraOperationButton"
+            android:text="x//y" />
+    </LinearLayout> <!-- E to Root -->
+    <LinearLayout
+        android:id="@+id/ans_to_pwr"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/e_to_root">
+        <TextView
+            android:id="@+id/btn_ans"
+            style="@style/ExtraOperationButton"
+            android:text="Ans" />
+        <TextView
+            android:id="@+id/btn_exp"
+            style="@style/ExtraOperationButton"
+            android:text="EXP" />
+        <TextView
+            android:id="@+id/btn_pwr"
+            style="@style/ExtraOperationButton"
+            android:text="x^y" />
+    </LinearLayout> <!-- Answer to Power -->
 </androidx.constraintlayout.widget.ConstraintLayout>

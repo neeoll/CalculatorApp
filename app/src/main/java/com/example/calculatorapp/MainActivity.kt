@@ -2,10 +2,8 @@ package com.example.calculatorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 
 enum class CharType {
@@ -15,8 +13,8 @@ enum class CharType {
 
 class MainActivity : AppCompatActivity() {
 
-    var hasTextBeenEntered = true
-    var lastOperationDone = ""
+    private var hasTextBeenEntered = false
+    private var lastOperationDone = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,18 +28,18 @@ class MainActivity : AppCompatActivity() {
             btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9
         )
         val operatorList = listOf<TextView>(
-            btn_div, btn_mul, btn_sub, btn_add
+            btn_div, btn_mul, btn_sub, btn_add,
         )
 
         numberList.forEach { button: TextView ->
              button.setOnClickListener {
-                testFun(button.text as String, CharType.NUMBER)
+                appendString(button.text as String, CharType.NUMBER)
              }
         }
 
         operatorList.forEach { button: TextView ->
             button.setOnClickListener {
-                testFun(button.text as String, CharType.OPERAND)
+                appendString(button.text as String, CharType.OPERAND)
             }
         }
 
@@ -52,21 +50,15 @@ class MainActivity : AppCompatActivity() {
         btn_clr.setOnClickListener {
             calcExpression.text = ""
             calcResult.text = "0"
-        }
-
-        btn_del.setOnClickListener {
-            val text = calcResult.text.toString()
-            if (text.isNotEmpty()) {
-                calcResult.text = text.dropLast(1)
-            }
+            hasTextBeenEntered = false
         }
 
         btn_ent.setOnClickListener {
-            solveExpression()
+            evaluateExpression()
         }
     }
 
-    private fun testFun(string: String, charType: CharType) {
+    private fun appendString(string: String, charType: CharType) {
         if (charType == CharType.NUMBER) {
             if (calcResult.text == "0" || !hasTextBeenEntered) {
                 calcResult.text = ""
@@ -89,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun solveExpression() {
+    private fun evaluateExpression() {
         if (lastOperationDone == "") {
             calcExpression.append(calcResult.text.toString())
         } else {

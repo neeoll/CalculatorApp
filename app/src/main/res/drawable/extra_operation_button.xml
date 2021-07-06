@@ -3,13 +3,13 @@
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <corners android:radius="75dp" />
-            <solid android:color="@color/textControlButton"/>
+            <solid android:color="@color/extraOperationButton"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="75dp" />
-            <solid android:color="@color/textControlButtonPressed"/>
+            <solid android:color="@color/extraOperationButtonPressed"/>
         </shape>
     </item>
 </selector>
