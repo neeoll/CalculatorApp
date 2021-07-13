@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -32,273 +31,335 @@
             android:layout_weight="1"
             android:singleLine="true"
             android:text=""
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            app:layout_constraintBottom_toTopOf="@id/textField_floor1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textField_ceiling"/>
         <TextView
             android:id="@+id/calcResult"
             style="@style/TextField"
             android:layout_width="match_parent"
             android:layout_weight="2"
             android:singleLine="true"
-            android:text="0" />
-    </LinearLayout> <!-- Text Fields -->
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@id/button_ceiling"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textField_floor1"/>
+    </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textField_floor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" /> <!-- Text Ceiling -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_ceiling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" /> <!-- Button Ceiling -->
-    <LinearLayout
-        android:id="@+id/lparen_to_clr"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toTopOf="@id/seven_to_div"
-        app:layout_constraintLeft_toRightOf="@id/button_wall"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_ceiling"
-        android:background="@android:color/transparent">
-        <TextView
-            android:id="@+id/btn_lparen"
-            style="@style/TextControlButton"
-            android:text="(" />
-        <TextView
-            android:id="@+id/btn_rparen"
-            style="@style/TextControlButton"
-            android:text=")" />
-        <TextView
-            android:id="@+id/btn_percent"
-            style="@style/TextControlButton"
-            android:text="%" />
-        <TextView
-            android:id="@+id/btn_clr"
-            style="@style/OperationButton"
-            android:text="AC" />
-    </LinearLayout> <!-- Left Parenthesis to Clear -->
-    <LinearLayout
-        android:id="@+id/seven_to_div"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toTopOf="@id/four_to_mul"
-        app:layout_constraintLeft_toRightOf="@id/button_wall"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lparen_to_clr">
-        <TextView
-            android:id="@+id/btn_7"
-            style="@style/NumberButton"
-            android:text="7" />
-        <TextView
-            android:id="@+id/btn_8"
-            style="@style/NumberButton"
-            android:text="8" />
-        <TextView
-            android:id="@+id/btn_9"
-            style="@style/NumberButton"
-            android:text="9" />
-        <TextView
-            android:id="@+id/btn_div"
-            style="@style/OperationButton"
-            android:text="/" />
-    </LinearLayout> <!-- Seven to Divide -->
-    <LinearLayout
-        android:id="@+id/four_to_mul"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toTopOf="@id/one_to_sub"
-        app:layout_constraintLeft_toRightOf="@id/button_wall"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seven_to_div">
-        <TextView
-            android:id="@+id/btn_4"
-            style="@style/NumberButton"
-            android:text="4" />
-        <TextView
-            android:id="@+id/btn_5"
-            style="@style/NumberButton"
-            android:text="5" />
-        <TextView
-            android:id="@+id/btn_6"
-            style="@style/NumberButton"
-            android:text="6" />
-        <TextView
-            android:id="@+id/btn_mul"
-            style="@style/OperationButton"
-            android:text="*" />
-    </LinearLayout> <!-- Four to Multiply -->
-    <LinearLayout
-        android:id="@+id/one_to_sub"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toTopOf="@id/zero_to_add"
-        app:layout_constraintLeft_toRightOf="@id/button_wall"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/four_to_mul">
-        <TextView
-            android:id="@+id/btn_1"
-            style="@style/NumberButton"
-            android:text="1" />
-        <TextView
-            android:id="@+id/btn_2"
-            style="@style/NumberButton"
-            android:text="2" />
-        <TextView
-            android:id="@+id/btn_3"
-            style="@style/NumberButton"
-            android:text="3" />
-        <TextView
-            android:id="@+id/btn_sub"
-            style="@style/OperationButton"
-            android:text="-" />
-    </LinearLayout> <!-- One to Subtract -->
-    <LinearLayout
-        android:id="@+id/zero_to_add"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/button_wall"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/one_to_sub">
-        <TextView
-            android:id="@+id/btn_0"
-            style="@style/NumberButton"
-            android:text="0" />
-        <TextView
-            android:id="@+id/btn_pt"
-            style="@style/NumberButton"
-            android:text="." />
-        <TextView
-            android:id="@+id/btn_ent"
-            style="@style/OperationButton"
-            android:text="=" />
-        <TextView
-            android:id="@+id/btn_add"
-            style="@style/OperationButton"
-            android:text="+" />
-    </LinearLayout> <!-- Zero to Add -->
+    <TextView
+        android:id="@+id/btn_raddeg"
+        style="@style/DarkGrayButton"
+        android:text="rad | deg"
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_wall"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_wall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.42" /> <!-- Button Wall -->
-    <LinearLayout
-        android:id="@+id/raddeg_to_factorial"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        app:layout_constraintGuide_percent=".2857142857142857" /> <!-- Button Wall -->
+    <TextView
+        android:id="@+id/btn_fact"
+        style="@style/DarkGrayButton"
+        android:text="x!"
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toRightOf="@id/button_wall"
+        app:layout_constraintRight_toLeftOf="@id/btn_lparen"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
+    <TextView
+        android:id="@+id/btn_lparen"
+        style="@style/LightGrayButton"
+        android:text="("
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toRightOf="@id/btn_fact"
+        app:layout_constraintRight_toLeftOf="@id/btn_filler"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
+    <TextView
+        android:id="@+id/btn_filler"
+        style="@style/LightGrayButton"
+        android:text=")"
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toRightOf="@id/btn_lparen"
+        app:layout_constraintRight_toLeftOf="@id/btn_percent"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
+    <TextView
+        android:id="@+id/btn_percent"
+        style="@style/LightGrayButton"
+        android:text="%"
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toRightOf="@id/btn_filler"
+        app:layout_constraintRight_toLeftOf="@id/btn_clr"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
+    <TextView
+        android:id="@+id/btn_clr"
+        style="@style/OrangeButton"
+        android:text="AC"
+        app:layout_constraintBottom_toTopOf="@id/button_floor4"
+        app:layout_constraintLeft_toRightOf="@id/btn_percent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_floor4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
+        app:layout_constraintGuide_percent="0.52" /> <!-- Button Floor 4 -->
+    <TextView
+        android:id="@+id/btn_inv"
+        style="@style/DarkGrayButton"
+        android:text="Inv"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/inv_to_ln"
-        app:layout_constraintRight_toLeftOf="@id/button_wall"
-        app:layout_constraintTop_toBottomOf="@id/button_ceiling">
-        <TextView
-            android:id="@+id/btn_raddeg"
-            style="@style/ExtraOperationButton"
-            android:layout_weight="2.05"
-            android:text="rad | deg" />
-        <TextView
-            android:id="@+id/btn_fact"
-            style="@style/ExtraOperationButton"
-            android:text="x!" />
-    </LinearLayout> <!-- Rad/Deg to Factorial -->
-    <LinearLayout
-        android:id="@+id/inv_to_ln"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        app:layout_constraintRight_toLeftOf="@id/btn_sin"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/btn_sin"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_sin"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/btn_inv"
+        app:layout_constraintRight_toLeftOf="@id/btn_ln"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/btn_ln"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_ln"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/btn_sin"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_7"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/mainBtn_7"
+        style="@style/GrayButton"
+        android:text="7"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/btn_ln"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_8"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/mainBtn_8"
+        style="@style/GrayButton"
+        android:text="8"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_7"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_9"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/mainBtn_9"
+        style="@style/GrayButton"
+        android:text="9"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_8"
+        app:layout_constraintRight_toLeftOf="@id/btn_div"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <TextView
+        android:id="@+id/btn_div"
+        style="@style/OrangeButton"
+        android:text="@string/view_div"
+        app:layout_constraintBottom_toTopOf="@id/button_floor3"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_9"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_floor4" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_floor3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
+        app:layout_constraintGuide_percent="0.64" /> <!-- Button Floor 3 -->
+    <TextView
+        android:id="@+id/btn_pi"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_pi"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pi_to_log"
-        app:layout_constraintRight_toLeftOf="@id/button_wall"
-        app:layout_constraintTop_toBottomOf="@id/raddeg_to_factorial">
-        <TextView
-            android:id="@+id/btn_inv"
-            style="@style/ExtraOperationButton"
-            android:text="Inv" />
-        <TextView
-            android:id="@+id/btn_sin"
-            style="@style/ExtraOperationButton"
-            android:text="sin" />
-        <TextView
-            android:id="@+id/btn_ln"
-            style="@style/ExtraOperationButton"
-            android:text="ln" />
-    </LinearLayout> <!-- Inv to Ln -->
-    <LinearLayout
-        android:id="@+id/pi_to_log"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        app:layout_constraintRight_toLeftOf="@id/btn_cos"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/btn_cos"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_cos"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/btn_pi"
+        app:layout_constraintRight_toLeftOf="@id/btn_log"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/btn_log"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_log"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/btn_cos"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_4"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/mainBtn_4"
+        style="@style/GrayButton"
+        android:text="4"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/btn_ln"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_5"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/mainBtn_5"
+        style="@style/GrayButton"
+        android:text="5"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_4"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_6"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/mainBtn_6"
+        style="@style/GrayButton"
+        android:text="6"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_5"
+        app:layout_constraintRight_toLeftOf="@id/btn_mul"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <TextView
+        android:id="@+id/btn_mul"
+        style="@style/OrangeButton"
+        android:text="@string/view_mul"
+        app:layout_constraintBottom_toTopOf="@id/button_floor2"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_6"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_floor3" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_floor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
+        app:layout_constraintGuide_percent="0.76" /> <!-- Button Floor 2 -->
+    <TextView
+        android:id="@+id/btn_e"
+        style="@style/DarkGrayButton"
+        android:text="e"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/e_to_root"
-        app:layout_constraintRight_toLeftOf="@id/button_wall"
-        app:layout_constraintTop_toBottomOf="@id/inv_to_ln">
-        <TextView
-            android:id="@+id/btn_pi"
-            style="@style/ExtraOperationButton"
-            android:text="@string/pi" />
-        <TextView
-            android:id="@+id/btn_cos"
-            style="@style/ExtraOperationButton"
-            android:text="cos" />
-        <TextView
-            android:id="@+id/btn_log"
-            style="@style/ExtraOperationButton"
-            android:text="log" />
-    </LinearLayout> <!-- Pi to Log -->
-    <LinearLayout
-        android:id="@+id/e_to_root"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        app:layout_constraintRight_toLeftOf="@id/btn_tan"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/btn_tan"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_tan"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/btn_pi"
+        app:layout_constraintRight_toLeftOf="@id/btn_sqrt"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/btn_sqrt"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_sqrt"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/btn_tan"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_1"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/mainBtn_1"
+        style="@style/GrayButton"
+        android:text="1"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/btn_ln"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_2"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/mainBtn_2"
+        style="@style/GrayButton"
+        android:text="2"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_1"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_3"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/mainBtn_3"
+        style="@style/GrayButton"
+        android:text="3"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_2"
+        app:layout_constraintRight_toLeftOf="@id/btn_add"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <TextView
+        android:id="@+id/btn_sub"
+        style="@style/OrangeButton"
+        android:text="-"
+        app:layout_constraintBottom_toTopOf="@id/button_floor1"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_floor2" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_floor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ans_to_pwr"
-        app:layout_constraintRight_toLeftOf="@id/button_wall"
-        app:layout_constraintTop_toBottomOf="@id/pi_to_log">
-        <TextView
-            android:id="@+id/btn_e"
-            style="@style/ExtraOperationButton"
-            android:text="e" />
-        <TextView
-            android:id="@+id/btn_tan"
-            style="@style/ExtraOperationButton"
-            android:text="tan" />
-        <TextView
-            android:id="@+id/btn_sqrt"
-            style="@style/ExtraOperationButton"
-            android:text="x//y" />
-    </LinearLayout> <!-- E to Root -->
-    <LinearLayout
-        android:id="@+id/ans_to_pwr"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintGuide_percent="0.88" /> <!-- Button Floor 1 -->
+    <TextView
+        android:id="@+id/btn_ans"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_ans"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/button_wall"
-        app:layout_constraintTop_toBottomOf="@id/e_to_root">
-        <TextView
-            android:id="@+id/btn_ans"
-            style="@style/ExtraOperationButton"
-            android:text="Ans" />
-        <TextView
-            android:id="@+id/btn_exp"
-            style="@style/ExtraOperationButton"
-            android:text="EXP" />
-        <TextView
-            android:id="@+id/btn_pwr"
-            style="@style/ExtraOperationButton"
-            android:text="x^y" />
-    </LinearLayout> <!-- Answer to Power -->
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_exp"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/btn_exp"
+        style="@style/DarkGrayButton"
+        android:text="EXP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_ans"
+        app:layout_constraintRight_toLeftOf="@id/btn_expnt"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/btn_expnt"
+        style="@style/DarkGrayButton"
+        android:text="@string/view_expnt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_exp"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_0"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/mainBtn_0"
+        style="@style/GrayButton"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_expnt"
+        app:layout_constraintRight_toLeftOf="@id/mainBtn_pt"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/mainBtn_pt"
+        style="@style/GrayButton"
+        android:text="."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_0"
+        app:layout_constraintRight_toLeftOf="@id/btn_ent"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/btn_ent"
+        style="@style/GrayButton"
+        android:text="="
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/mainBtn_pt"
+        app:layout_constraintRight_toLeftOf="@id/btn_add"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
+    <TextView
+        android:id="@+id/btn_add"
+        style="@style/OrangeButton"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_ent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_floor1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

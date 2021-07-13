@@ -1,4 +1,43 @@
 <resources>
     <string name="app_name">CalculatorApp</string>
-    <string name="pi">&#960;</string>
+    <!-- Activity_Main String Resources -->
+    <string name="view_pi">&#960;</string>
+    <string name="view_sin">sin</string>
+    <string name="view_invSin">sin&#8315;&#185;</string>
+    <string name="view_ln">ln</string>
+    <string name="view_euler_n">e&#8319;</string>
+    <string name="view_cos">cos</string>
+    <string name="view_invCos">cos&#8315;&#185;</string>
+    <string name="view_log">log</string>
+    <string name="view_ten_n">10&#8319;</string>
+    <string name="view_sqrt">&#8730;</string>
+    <string name="view_sqrd">x&#178;</string>
+    <string name="view_tan">tan</string>
+    <string name="view_invTan">tan&#8315;&#185;</string>
+    <string name="view_ans">Ans</string>
+    <string name="view_rnd">Rnd</string>
+    <string name="view_expnt">x&#696;</string>
+    <string name="view_nthRoot">&#696;&#8730;x</string>
+    <string name="view_div">&#247;</string>
+    <string name="view_mul">&#215;</string>
+
+    <!-- Corresponding values for ExpressionBuilder -->
+    <string name="pi">pi</string>
+    <string name="sin">sin(</string>
+    <string name="invSin">asin(</string>
+    <string name="ln">ln(</string>
+    <string name="euler_n">e^</string>
+    <string name="cos">cos(</string>
+    <string name="invCos">acos(</string>
+    <string name="log">log(</string>
+    <string name="ten_n">10^</string>
+    <string name="sqrt">sqrt(</string>
+    <string name="sqrd">^2</string>
+    <string name="tan">tan(</string>
+    <string name="invTan">atan(</string>
+    <string name="rnd">Rnd</string>
+    <string name="expnt">^</string>
+    <string name="nthRoot">&#696;&#8730;x</string>
+    <string name="div">/</string>
+    <string name="mul">*</string>
 </resources>
