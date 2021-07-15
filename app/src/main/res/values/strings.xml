@@ -1,25 +1,40 @@
 <resources>
     <string name="app_name">CalculatorApp</string>
     <!-- Activity_Main String Resources -->
-    <string name="view_pi">&#960;</string>
-    <string name="view_sin">sin</string>
-    <string name="view_invSin">sin&#8315;&#185;</string>
-    <string name="view_ln">ln</string>
-    <string name="view_euler_n">e&#8319;</string>
-    <string name="view_cos">cos</string>
-    <string name="view_invCos">cos&#8315;&#185;</string>
-    <string name="view_log">log</string>
-    <string name="view_ten_n">10&#8319;</string>
-    <string name="view_sqrt">&#8730;</string>
-    <string name="view_sqrd">x&#178;</string>
-    <string name="view_tan">tan</string>
-    <string name="view_invTan">tan&#8315;&#185;</string>
+    <!-- TODO: Implement the unicode string values for all applicable string resources -->
+    <!--
+        pi: &#960;
+        invSin: sin&#8315;&#185;
+        euler_n: e&#8319;
+        invCos: cos&#8315;&#185;
+        ten_n: 10&#8319;
+        sqrt: &#8730;
+        sqrd: x&#178;
+        invTan: tan&#8315;&#185;
+        expnt: x&#696;
+        nthRoot: &#696;&#8730;x
+        view_div: &#247;
+        view_mul: &#215
+    -->
+    <string name="view_pi">pi</string>
+    <string name="view_sin">sin(</string>
+    <string name="view_invSin">asin(</string>
+    <string name="view_ln">ln(</string>
+    <string name="view_euler_n">e^</string>
+    <string name="view_cos">cos(</string>
+    <string name="view_invCos">acos(</string>
+    <string name="view_log">log(</string>
+    <string name="view_ten_n">10^</string>
+    <string name="view_sqrt">sqrt(</string>
+    <string name="view_sqrd">^2</string>
+    <string name="view_tan">tan(</string>
+    <string name="view_invTan">atan(</string>
     <string name="view_ans">Ans</string>
     <string name="view_rnd">Rnd</string>
-    <string name="view_expnt">x&#696;</string>
-    <string name="view_nthRoot">&#696;&#8730;x</string>
-    <string name="view_div">&#247;</string>
-    <string name="view_mul">&#215;</string>
+    <string name="view_expnt">^</string>
+    <string name="view_nthRoot">ERR</string>
+    <string name="view_div">/</string>
+    <string name="view_mul">*</string>
 
     <!-- Corresponding values for ExpressionBuilder -->
     <string name="pi">pi</string>

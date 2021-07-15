@@ -1,45 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="ViewStrings">
-        <item>@string/view_pi</item>
+    <string-array name="nonInvArray">
         <item>@string/view_sin</item>
-        <item>@string/view_invSin</item>
         <item>@string/view_ln</item>
-        <item>@string/view_euler_n</item>
         <item>@string/view_cos</item>
-        <item>@string/view_invCos</item>
         <item>@string/view_log</item>
-        <item>@string/view_ten_n</item>
-        <item>@string/view_sqrt</item>
-        <item>@string/view_sqrd</item>
         <item>@string/view_tan</item>
-        <item>@string/view_invTan</item>
+        <item>@string/view_sqrt</item>
         <item>@string/view_ans</item>
-        <item>@string/view_rnd</item>
         <item>@string/view_expnt</item>
-        <item>@string/view_nthRoot</item>
-        <item>@string/view_div</item>
-        <item>@string/view_mul</item>
     </string-array>
 
-    <string-array name="ExpressionStrings">
-        <item>@string/pi</item>
-        <item>@string/sin</item>
-        <item>@string/invSin</item>
-        <item>@string/ln</item>
-        <item>@string/euler_n</item>
-        <item>@string/cos</item>
-        <item>@string/invCos</item>
-        <item>@string/log</item>
-        <item>@string/ten_n</item>
-        <item>@string/sqrt</item>
-        <item>@string/sqrd</item>
-        <item>@string/tan</item>
-        <item>@string/invTan</item>
-        <item>@string/rnd</item>
-        <item>@string/expnt</item>
-        <item>@string/nthRoot</item>
-        <item>@string/div</item>
-        <item>@string/mul</item>
+    <string-array name="invArray">
+        <item>@string/view_invSin</item>
+        <item>@string/view_euler_n</item>
+        <item>@string/view_invCos</item>
+        <item>@string/view_ten_n</item>
+        <item>@string/view_sqrd</item>
+        <item>@string/view_invTan</item>
+        <item>@string/view_rnd</item>
+        <item>@string/view_nthRoot</item>
     </string-array>
 </resources>
