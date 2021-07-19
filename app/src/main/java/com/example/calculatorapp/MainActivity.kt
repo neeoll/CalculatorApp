@@ -1,5 +1,6 @@
 package com.example.calculatorapp
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -10,68 +11,63 @@ import androidx.core.view.children
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
 
-enum class CharType {
+
+enum class ButtonType {
     NUMBER,
-    OPERAND
+    OPERAND,
+    CAN_INV
 }
 
 class MainActivity : AppCompatActivity() {
 
     private var hasTextBeenEntered = false
+    private var isAltButtons = false
     private var expressionString = ""
-    private var lastOperationDone = ""
-    private var isLandscape: Boolean = false
-    private var isAltButtons: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        addButtonListeners()
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        addButtonListeners(isLandscape)
     }
 
-    private fun addButtonListeners() {
-        var invBtnList: MutableList<TextView> = mutableListOf()
+    private fun addButtonListeners(isLandscape: Boolean) {
+        val invBtnList: MutableList<TextView> = mutableListOf()
 
-        for (element in constraintLayout.children) {
-            if (element is TextView && element.idPrefix('_') == "mainBtn") {
-                element.setOnClickListener {
-                    appendString(element.text.toString(), CharType.NUMBER)
-                    writeExpression(element.text.toString())
+        constraintLayout.children.forEach { it ->
+            when (it.idPrefix('_')) {
+                "mainBtn" -> it.setOnClickListener { it as TextView
+                    appendViewString(it.text.toString(), ButtonType.NUMBER)
                 }
-            }
-            if (element is TextView && element.idPrefix('_') == "operatorBtn") {
-                element.setOnClickListener {
-                    appendString(element.text.toString(), CharType.OPERAND)
-                    writeExpression(element.text.toString())
+                "operatorBtn" -> it.setOnClickListener { it as TextView
+                    appendViewString(it.text.toString(), ButtonType.OPERAND)
                 }
-            }
-            if (element is TextView && element.idPrefix('_') == "canInvBtn") {
-                invBtnList.add(element)
-                element.setOnClickListener {
-                    if (calcResult.text == "0" || !hasTextBeenEntered) {
-                        calcResult.text = element.text.toString()
-                        writeExpression(element.text.toString())
-                        hasTextBeenEntered = true
-                    } else {
-                        calcResult.appendMulti(" ", "*", " ", element.text.toString())
-                        writeExpression("*", element.text.toString())
-                        hasTextBeenEntered = true
+                "canInvBtn" -> {
+                    invBtnList.add(it as TextView)
+                    it.setOnClickListener { it as TextView
+                        appendViewString(it.text.toString(), ButtonType.CAN_INV)
                     }
                 }
             }
         }
 
         btn_clr.setOnClickListener {
-            calcExpression.text = ""
-            calcResult.text = "0"
+            calcExpression.text = "0"
             expressionString = ""
             hasTextBeenEntered = false
         }
 
         btn_ent.setOnClickListener {
             evaluateExpression()
+        }
+
+        btn_raddeg.setOnClickListener {
+            // TODO: Not yet implemented
+        }
+
+        btn_percent.setOnClickListener {
+            // TODO: Not yet implemented
         }
 
         if (isLandscape) {
@@ -81,78 +77,98 @@ class MainActivity : AppCompatActivity() {
             btn_inv.setOnClickListener {
                 isAltButtons = if (!isAltButtons) {
                     setAltButtons(invBtnList, invArray)
+                    mainBtn_ans.text = getString(R.string.view_rnd)
+                    operatorBtn_expnt.text = getString(R.string.view_nthRoot)
                     true
                 } else {
                     setAltButtons(invBtnList, nonInvArray)
+                    mainBtn_ans.text = getString(R.string.view_ans)
+                    operatorBtn_expnt.text = getString(R.string.view_exponent)
                     false
                 }
             }
-
-            btn_pi.setOnClickListener {
-                if (calcResult.text == "0" || !hasTextBeenEntered) {
-                    calcResult.text = btn_pi.text.toString()
-                    writeExpression(btn_pi.text.toString())
-                    hasTextBeenEntered = true
-                } else {
-                    calcResult.appendMulti(" ", "*", " ", btn_pi.text.toString())
-                    writeExpression("*", btn_pi.text.toString())
-                    hasTextBeenEntered = true
-                }
-            }
         }
     }
 
-    private fun appendString(string: String, charType: CharType) {
-        if (charType == CharType.NUMBER) {
-            if (calcResult.text == "0" || !hasTextBeenEntered) {
-                calcResult.text = string
+    private fun appendViewString(string: String, buttonType: ButtonType) {
+        if (buttonType == ButtonType.NUMBER) {
+            if (calcExpression.text == "0" || !hasTextBeenEntered) {
+                calcExpression.text = string
             } else {
-                calcResult.append(string)
+                calcExpression.append(string)
             }
-
-            hasTextBeenEntered = true
         }
-        else if (charType == CharType.OPERAND) {
-            if (calcResult.text.isEmpty()) { return }
+        else if (buttonType == ButtonType.OPERAND) {
+            if (calcExpression.text.isEmpty()) { return }
 
-            calcExpression.text = calcResult.text.toString()
-            calcExpression.appendMulti(" ", string, " ")
-            hasTextBeenEntered = false
-            lastOperationDone= ""
+            calcExpression.append(string)
         }
+        else if (buttonType == ButtonType.CAN_INV) {
+            if (calcExpression.text == "0" || !hasTextBeenEntered) {
+                calcExpression.text = string
+                calcExpression.append("(")
+            } else {
+                calcExpression.append(string)
+                calcExpression.append("(")
+            }
+        }
+        hasTextBeenEntered = true
+        writeExpression(string)
     }
 
+    // TODO: See if it's possible to condense this function any further
     private fun writeExpression(vararg strings: String) {
         for (string in strings) {
-            expressionString += string
+            expressionString += when (string) {
+                getString(R.string.view_mul) -> { "*" }
+                getString(R.string.view_div) -> { "/" }
+                getString(R.string.view_exponent) -> { "^" }
+                getString(R.string.view_nthRoot) -> { "$" }
+                getString(R.string.view_sqrt) -> { "sqrt(" }
+                getString(R.string.view_squared) -> { "^2" }
+                getString(R.string.view_sin) -> { "sin(" }
+                getString(R.string.view_invSin) -> { "asin(" }
+                getString(R.string.view_cos) -> { "cos(" }
+                getString(R.string.view_invCos) -> { "acos(" }
+                getString(R.string.view_tan) -> { "tan(" }
+                getString(R.string.view_invTan) -> { "atan(" }
+                getString(R.string.view_ln) -> { "ln(" }
+                getString(R.string.view_exp) -> { ":" }
+                getString(R.string.view_fact) -> { "!" }
+                getString(R.string.view_ans) -> { calcResult.text.toString().substringAfter('=') }
+                getString(R.string.view_rnd) -> { Math.random().toString() }
+                else -> { string }
+            }
         }
-
         Log.e("EXPRESSION", expressionString)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun evaluateExpression() {
-        if (lastOperationDone == "") {
-            calcExpression.append(calcResult.text.toString())
-        } else {
-            calcExpression.text = calcResult.text.toString()
-            calcExpression.appendMulti(" ", lastOperationDone)
-        }
-
-        lastOperationDone = calcExpression.text.toString().substringAfter(' ')
-
         val result =  solveExpression()
         val longResult = result.toLong()
 
         if (result == longResult.toDouble()) {
-            calcResult.text = longResult.toString()
+            calcResult.text = "Ans = $longResult"
         } else {
-            calcResult.text = result.toString()
+            calcResult.text = "Ans = $result"
         }
+
+        hasTextBeenEntered = false
     }
 
     private fun solveExpression(): Double {
-        val expression = ExpressionBuilder(expressionString).build()
-        return expression.evaluate()
+        return ExpressionBuilder(expressionString)
+            .operator(
+                Operators().factorial,
+                Operators().exp,
+                Operators().nthRoot
+            )
+            .functions(
+                Functions().natLog
+            )
+            .build()
+            .evaluate()
     }
 
     private fun setAltButtons(list: MutableList<TextView>, array: Array<String>) {
@@ -163,8 +179,7 @@ class MainActivity : AppCompatActivity() {
 
     // Extension functions/properties
     private fun View.idPrefix(delimiter: Char): String {
-        val viewId = resources.getResourceEntryName(id)
-        return viewId.substringBefore(delimiter)
+        return resources.getResourceEntryName(id).substringBefore(delimiter)
     }
 
     private fun TextView.appendMulti(vararg strings: String) {

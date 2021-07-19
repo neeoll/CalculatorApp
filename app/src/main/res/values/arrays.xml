@@ -8,7 +8,7 @@
         <item>@string/view_tan</item>
         <item>@string/view_sqrt</item>
         <item>@string/view_ans</item>
-        <item>@string/view_expnt</item>
+        <item>@string/view_exponent</item>
     </string-array>
 
     <string-array name="invArray">
@@ -16,8 +16,8 @@
         <item>@string/view_euler_n</item>
         <item>@string/view_invCos</item>
         <item>@string/view_ten_n</item>
-        <item>@string/view_sqrd</item>
         <item>@string/view_invTan</item>
+        <item>@string/view_squared</item>
         <item>@string/view_rnd</item>
         <item>@string/view_nthRoot</item>
     </string-array>
