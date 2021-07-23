@@ -18,6 +18,12 @@ class Operators {
         }
     }
 
+    var percent: Operator = object: Operator("%", 1, true, PRECEDENCE_DIVISION + 2) {
+        override fun apply(vararg args: Double): Double {
+            return args[0] * 0.01
+        }
+    }
+
     var exp: Operator = object: Operator(":", 2, false, PRECEDENCE_POWER + 2) {
         override fun apply(vararg args: Double): Double {
             val arg2 = args[1].toInt()

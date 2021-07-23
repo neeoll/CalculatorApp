@@ -61,10 +61,10 @@
         android:text=""
         app:layout_constraintLeft_toRightOf="@id/btn_clr"
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
-        app:layout_constraintRight_toLeftOf="@id/btn_percent"
+        app:layout_constraintRight_toLeftOf="@id/operatorBtn_percent"
         app:layout_constraintTop_toBottomOf="@id/button_ceiling"/>
     <TextView
-        android:id="@+id/btn_percent"
+        android:id="@+id/operatorBtn_percent"
         style="@style/LightGrayButton"
         android:text="%"
         app:layout_constraintLeft_toRightOf="@id/mainBtn_filler"

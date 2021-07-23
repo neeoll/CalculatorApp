@@ -24,6 +24,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textField_ceiling">
+
         <TextView
             android:id="@+id/calcResult"
             style="@style/TextField"
@@ -75,7 +76,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".2857142857142857" /> <!-- Button Wall -->
     <TextView
-        android:id="@+id/operatorBtn_fact"
+        android:id="@+id/btn_fact"
         style="@style/DarkGrayButton"
         android:text="@string/view_fact"
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
@@ -87,7 +88,7 @@
         style="@style/LightGrayButton"
         android:text="("
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
-        app:layout_constraintLeft_toRightOf="@id/operatorBtn_fact"
+        app:layout_constraintLeft_toRightOf="@id/btn_fact"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_rparen"
         app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
     <TextView
@@ -96,10 +97,10 @@
         android:text=")"
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
         app:layout_constraintLeft_toRightOf="@id/mainBtn_lparen"
-        app:layout_constraintRight_toLeftOf="@id/btn_percent"
+        app:layout_constraintRight_toLeftOf="@id/operatorBtn_percent"
         app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
     <TextView
-        android:id="@+id/btn_percent"
+        android:id="@+id/operatorBtn_percent"
         style="@style/LightGrayButton"
         android:text="%"
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
@@ -111,7 +112,7 @@
         style="@style/OrangeButton"
         android:text="AC"
         app:layout_constraintBottom_toTopOf="@id/button_floor4"
-        app:layout_constraintLeft_toRightOf="@id/btn_percent"
+        app:layout_constraintLeft_toRightOf="@id/operatorBtn_percent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_ceiling" />
     <androidx.constraintlayout.widget.Guideline
@@ -126,22 +127,22 @@
         android:text="Inv"
         app:layout_constraintBottom_toTopOf="@id/button_floor3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_sin"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_sin"
         app:layout_constraintTop_toBottomOf="@id/button_floor4" />
     <TextView
-        android:id="@+id/canInvBtn_sin"
+        android:id="@+id/invBtn_sin"
         style="@style/DarkGrayButton"
         android:text="@string/view_sin"
         app:layout_constraintBottom_toTopOf="@id/button_floor3"
         app:layout_constraintLeft_toRightOf="@id/btn_inv"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_ln"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_ln"
         app:layout_constraintTop_toBottomOf="@id/button_floor4" />
     <TextView
-        android:id="@+id/canInvBtn_ln"
+        android:id="@+id/invBtn_ln"
         style="@style/DarkGrayButton"
         android:text="@string/view_ln"
         app:layout_constraintBottom_toTopOf="@id/button_floor3"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_sin"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_sin"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_7"
         app:layout_constraintTop_toBottomOf="@id/button_floor4" />
     <TextView
@@ -149,7 +150,7 @@
         style="@style/GrayButton"
         android:text="7"
         app:layout_constraintBottom_toTopOf="@id/button_floor3"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_ln"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_ln"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_8"
         app:layout_constraintTop_toBottomOf="@id/button_floor4" />
     <TextView
@@ -188,22 +189,22 @@
         android:text="@string/view_pi"
         app:layout_constraintBottom_toTopOf="@id/button_floor2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_cos"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_cos"
         app:layout_constraintTop_toBottomOf="@id/button_floor3" />
     <TextView
-        android:id="@+id/canInvBtn_cos"
+        android:id="@+id/invBtn_cos"
         style="@style/DarkGrayButton"
         android:text="@string/view_cos"
         app:layout_constraintBottom_toTopOf="@id/button_floor2"
         app:layout_constraintLeft_toRightOf="@id/mainBtn_pi"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_log"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_log"
         app:layout_constraintTop_toBottomOf="@id/button_floor3" />
     <TextView
-        android:id="@+id/canInvBtn_log"
+        android:id="@+id/invBtn_log"
         style="@style/DarkGrayButton"
         android:text="@string/view_log"
         app:layout_constraintBottom_toTopOf="@id/button_floor2"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_cos"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_cos"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_4"
         app:layout_constraintTop_toBottomOf="@id/button_floor3" />
     <TextView
@@ -211,7 +212,7 @@
         style="@style/GrayButton"
         android:text="4"
         app:layout_constraintBottom_toTopOf="@id/button_floor2"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_log"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_log"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_5"
         app:layout_constraintTop_toBottomOf="@id/button_floor3" />
     <TextView
@@ -250,22 +251,22 @@
         android:text="e"
         app:layout_constraintBottom_toTopOf="@id/button_floor1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_tan"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_tan"
         app:layout_constraintTop_toBottomOf="@id/button_floor2" />
     <TextView
-        android:id="@+id/canInvBtn_tan"
+        android:id="@+id/invBtn_tan"
         style="@style/DarkGrayButton"
         android:text="@string/view_tan"
         app:layout_constraintBottom_toTopOf="@id/button_floor1"
         app:layout_constraintLeft_toRightOf="@id/mainBtn_pi"
-        app:layout_constraintRight_toLeftOf="@id/canInvBtn_sqrt"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_sqrt"
         app:layout_constraintTop_toBottomOf="@id/button_floor2" />
     <TextView
-        android:id="@+id/canInvBtn_sqrt"
+        android:id="@+id/invBtn_sqrt"
         style="@style/DarkGrayButton"
         android:text="@string/view_sqrt"
         app:layout_constraintBottom_toTopOf="@id/button_floor1"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_tan"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_tan"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_1"
         app:layout_constraintTop_toBottomOf="@id/button_floor2" />
     <TextView
@@ -273,7 +274,7 @@
         style="@style/GrayButton"
         android:text="1"
         app:layout_constraintBottom_toTopOf="@id/button_floor1"
-        app:layout_constraintLeft_toRightOf="@id/canInvBtn_sqrt"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_sqrt"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_2"
         app:layout_constraintTop_toBottomOf="@id/button_floor2" />
     <TextView
@@ -307,7 +308,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.88" /> <!-- Button Floor 1 -->
     <TextView
-        android:id="@+id/mainBtn_ans"
+        android:id="@+id/invBtn_ans"
         style="@style/DarkGrayButton"
         android:text="@string/view_ans"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -319,11 +320,11 @@
         style="@style/DarkGrayButton"
         android:text="@string/view_exp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/mainBtn_ans"
-        app:layout_constraintRight_toLeftOf="@id/operatorBtn_expnt"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_ans"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_expnt"
         app:layout_constraintTop_toBottomOf="@id/button_floor1" />
     <TextView
-        android:id="@+id/operatorBtn_expnt"
+        android:id="@+id/invBtn_expnt"
         style="@style/DarkGrayButton"
         android:text="@string/view_exponent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -335,7 +336,7 @@
         style="@style/GrayButton"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/operatorBtn_expnt"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_expnt"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_pt"
         app:layout_constraintTop_toBottomOf="@id/button_floor1" />
     <TextView

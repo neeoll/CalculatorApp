@@ -21,4 +21,9 @@
     <string name="view_mul">&#215;</string>
     <string name="view_fact">x!</string>
     <string name="view_exp">EXP</string>
+
+    <string name="euler_n">e^</string>
+    <string name="ten_n">10^</string>
+    <string name="squared">&#178;</string>
+    <string name="exponent">^</string>
 </resources>
