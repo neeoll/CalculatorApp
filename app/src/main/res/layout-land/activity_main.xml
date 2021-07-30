@@ -321,10 +321,10 @@
         android:text="@string/view_exp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/invBtn_ans"
-        app:layout_constraintRight_toLeftOf="@id/invBtn_expnt"
+        app:layout_constraintRight_toLeftOf="@id/invBtn_exponent"
         app:layout_constraintTop_toBottomOf="@id/button_floor1" />
     <TextView
-        android:id="@+id/invBtn_expnt"
+        android:id="@+id/invBtn_exponent"
         style="@style/DarkGrayButton"
         android:text="@string/view_exponent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -336,7 +336,7 @@
         style="@style/GrayButton"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/invBtn_expnt"
+        app:layout_constraintLeft_toRightOf="@id/invBtn_exponent"
         app:layout_constraintRight_toLeftOf="@id/mainBtn_pt"
         app:layout_constraintTop_toBottomOf="@id/button_floor1" />
     <TextView

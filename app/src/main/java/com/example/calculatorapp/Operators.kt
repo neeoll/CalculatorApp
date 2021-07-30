@@ -3,8 +3,13 @@ package com.example.calculatorapp
 import net.objecthunter.exp4j.operator.Operator
 import kotlin.math.pow
 
+/* Possible chars to be used as operators:
+*  #,§,&,;,~,<,>,|
+* */
+
 
 class Operators {
+
     var factorial: Operator = object : Operator("!", 1, true, PRECEDENCE_POWER + 1) {
         override fun apply(vararg args: Double): Double {
             val arg = args[0].toInt()

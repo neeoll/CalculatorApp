@@ -1,16 +1,20 @@
 package com.example.calculatorapp
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.SuperscriptSpan
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
@@ -22,11 +26,14 @@ enum class Type {
     FUNCTION
 }
 
+
 class MainActivity : AppCompatActivity() {
 
-    private var isAltButtons = false
     private var expressionString = ""
     private var isSuperscript = false
+    private var hasTextBeenEntered = false
+    private val functions = Functions()
+    private val operators = Operators()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,17 +58,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btn_ent.setOnClickListener { evaluateExpression() }
+        val fadeExpression = ObjectAnimator.ofFloat(calcExpression, "alpha", 0.0f, 1.0f)
+        val scaleExpression = ObjectAnimator.ofFloat(calcExpression, "scaleY", 0.0f, 1.0f)
+        val fadeResult = ObjectAnimator.ofFloat(calcResult, "alpha", 0.0f, 1.0f)
+        val scaleResult = ObjectAnimator.ofFloat(calcResult, "scaleY", 0.0f, 1.0f)
+
+        btn_ent.setOnClickListener {
+            AnimatorSet().apply {
+                duration = 250
+                playTogether(fadeExpression, scaleExpression, fadeResult, scaleResult)
+                evaluateExpression()
+                start()
+            }
+        }
+
         btn_clr.setOnClickListener {
             calcExpression.text = "0"
             expressionString = ""
             isSuperscript = false
+            hasTextBeenEntered = false
         }
 
         if (isLandscape) {
+            var isAltButtons = false
             val nonInvArray: Array<String> = resources.getStringArray(R.array.nonInvArray)
             val invArray: Array<String> = resources.getStringArray(R.array.invArray)
+            val raddegSpan = SpannableStringBuilder(btn_raddeg.text.toString())
 
+            setAngleUnit(raddegSpan)
+
+            btn_raddeg.setOnClickListener { setAngleUnit(raddegSpan) }
             btn_fact.setOnClickListener { appendToView("!", Type.OPERATOR) }
             invBtn_sin.setOnClickListener { appendToView(invBtn_sin.text.toString(), Type.FUNCTION) }
             invBtn_cos.setOnClickListener { appendToView(invBtn_cos.text.toString(), Type.FUNCTION) }
@@ -69,8 +95,8 @@ class MainActivity : AppCompatActivity() {
             invBtn_ans.setOnClickListener { appendToView(invBtn_ans.text.toString(), Type.NUMBER) }
             invBtn_ln.setOnClickListener { appendToView(invBtn_ln.text.toString(), Type.FUNCTION) }
             invBtn_log.setOnClickListener { appendToView(invBtn_log.text.toString(), Type.FUNCTION) }
-            invBtn_sqrt.setOnClickListener { appendToView(getString(R.string.view_sqrt), Type.OPERATOR) }
-            invBtn_expnt.setOnClickListener {
+            invBtn_sqrt.setOnClickListener { appendToView(getString(R.string.view_sqrt), Type.NUMBER) }
+            invBtn_exponent.setOnClickListener {
                 isSuperscript = true
                 writeExpression("^")
             }
@@ -78,21 +104,22 @@ class MainActivity : AppCompatActivity() {
             btn_inv.setOnClickListener {
                 isAltButtons = if (!isAltButtons) {
                     setAltButtons(invBtnList, invArray)
-                    invListeners()
+                    invListeners(isAltButtons)
                     true
                 } else {
                     setAltButtons(invBtnList, nonInvArray)
-                    invListeners()
+                    invListeners(isAltButtons)
                     false
                 }
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun appendToView(string: String, type: Type) {
         when (type) {
             Type.NUMBER -> {
-                if (calcExpression.text == "0") {
+                if (!hasTextBeenEntered) {
                     calcExpression.text = string
                 } else {
                     calcExpression.customAppend(string, isSuperscript = isSuperscript)
@@ -100,32 +127,39 @@ class MainActivity : AppCompatActivity() {
             }
             Type.OPERATOR -> {
                 if (calcExpression.text.isEmpty()) { return }
+                if (expressionString.isEmpty()) { writeExpression("0") }
                 isSuperscript = false
                 calcExpression.customAppend(string, isSuperscript = isSuperscript)
             }
             Type.FUNCTION -> {
                 isSuperscript = false
-                calcExpression.customAppend(string, "(", isSuperscript = isSuperscript)
+                if (!hasTextBeenEntered) {
+                    calcExpression.text = "$string("
+                } else {
+                    calcExpression.customAppend(string, "(", isSuperscript = isSuperscript)
+                }
             }
         }
+        hasTextBeenEntered = true
         writeExpression(string)
     }
 
     // TODO: See if it's possible to condense this function any further
     private fun writeExpression(vararg strings: String) {
-        for (string in strings) {
+        strings.forEach { string ->
             expressionString += when (string) {
                 getString(R.string.view_mul) -> { "*" }
                 getString(R.string.view_div) -> { "/" }
                 getString(R.string.view_nthRoot) -> { "$" }
-                getString(R.string.view_sqrt) -> { "sqrt(" }
+                getString(R.string.view_sqrt) -> { "2$" }
                 getString(R.string.squared) -> { "^2" }
                 getString(R.string.view_sin) -> { "sin(" }
-                getString(R.string.view_invSin) -> { "asin(" }
+                getString(R.string.view_arcSin) -> { "asin(" }
                 getString(R.string.view_cos) -> { "cos(" }
-                getString(R.string.view_invCos) -> { "acos(" }
+                getString(R.string.view_log) -> { "log(" }
+                getString(R.string.view_arcCos) -> { "acos(" }
                 getString(R.string.view_tan) -> { "tan(" }
-                getString(R.string.view_invTan) -> { "atan(" }
+                getString(R.string.view_arcTan) -> { "atan(" }
                 getString(R.string.view_ln) -> { "ln(" }
                 getString(R.string.view_exp) -> { ":" }
                 getString(R.string.view_fact) -> { "!" }
@@ -134,35 +168,49 @@ class MainActivity : AppCompatActivity() {
                 else -> { string }
             }
         }
-        Log.e("EXPRESSION", expressionString)
     }
 
     @SuppressLint("SetTextI18n")
     private fun evaluateExpression() {
-        val result =  solveExpression()
-        val longResult = result.toLong()
+        try {
+            val result = solveExpression()
+            val longResult = result.toLong()
 
-        if (result == longResult.toDouble()) {
-            calcResult.text = "Ans = $longResult"
-            calcExpression.text = "$longResult"
-            expressionString = "$longResult"
-        } else {
-            calcResult.text = "Ans = $result"
-            calcExpression.text = "$result"
-            expressionString = "$result"
+            if (result == longResult.toDouble()) {
+                calcResult.text = "Ans = $longResult"
+                calcExpression.text = "$longResult"
+                expressionString = "$longResult"
+            } else {
+                calcResult.text = "Ans = $result"
+                calcExpression.text = "$result"
+                expressionString = "$result"
+            }
+
+            Log.e("EXPRESSION", result.toString())
+
+        } catch (e: ArithmeticException) {
+            calcExpression.text = "Undefined"
+        } catch (e: IllegalArgumentException) {
+            calcExpression.text = "Error"
         }
     }
 
     private fun solveExpression(): Double {
         return ExpressionBuilder(expressionString)
             .operator(
-                Operators().factorial,
-                Operators().percent,
-                Operators().exp,
-                Operators().nthRoot
+                operators.factorial,
+                operators.percent,
+                operators.exp,
+                operators.nthRoot
             )
             .functions(
-                Functions().natLog
+                functions.sine,
+                functions.arcSine,
+                functions.cosine,
+                functions.arcCosine,
+                functions.tangent,
+                functions.arcTangent,
+                functions.natLog
             )
             .build()
             .evaluate()
@@ -174,12 +222,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun invListeners() {
+    private fun invListeners(isAltButtons: Boolean) {
         if (isAltButtons) {
             invBtn_ln.setOnClickListener { appendToView(invBtn_ln.text.toString(), Type.FUNCTION) }
             invBtn_log.setOnClickListener { appendToView(invBtn_log.text.toString(), Type.FUNCTION) }
-            invBtn_sqrt.setOnClickListener { appendToView(invBtn_sqrt.text.toString(), Type.OPERATOR) }
-            invBtn_expnt.setOnClickListener {
+            invBtn_exponent.setOnClickListener {
                 isSuperscript = true
                 writeExpression("^") }
         } else {
@@ -193,9 +240,8 @@ class MainActivity : AppCompatActivity() {
                 isSuperscript = true
                 writeExpression("^")
             }
-            invBtn_sqrt.setOnClickListener { appendToView(getString(R.string.squared), Type.OPERATOR) }
-            invBtn_expnt.setOnClickListener {
-                val toBeConverted = calcExpression.text.toString().substringAfter('+')
+            invBtn_exponent.setOnClickListener {
+                val toBeConverted = calcExpression.text.toString().split('+','-','*','/').last()
 
                 calcExpression.text.toString().dropLast(toBeConverted.length).also { calcExpression.text = it }
                 for (element in toBeConverted) {
@@ -207,21 +253,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertAt(target: String, position: Int, insert: String): String {
-        val targetLen = target.length
-        require(!(position < 0 || position > targetLen)) { "position=$position" }
-        if (insert.isEmpty()) { return target }
-        if (position == 0) {
-            return insert + target
-        } else if (position == targetLen) {
-            return target + insert
+    private fun setAngleUnit(string: SpannableStringBuilder) {
+        string.clearSpans()
+        when (functions.isRadians) {
+            true -> {
+                string.setSpan(ForegroundColorSpan(
+                    ContextCompat.getColor(applicationContext, R.color.operationButton)),
+                    6,
+                    9,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                functions.isRadians = false
+            }
+            false -> {
+                string.setSpan(ForegroundColorSpan(
+                    ContextCompat.getColor(applicationContext, R.color.operationButton)),
+                    0,
+                    3,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                functions.isRadians = true
+            }
         }
-        val insertLen = insert.length
-        val buffer = CharArray(targetLen + insertLen)
-        target.toCharArray(buffer, 0, 0, position)
-        insert.toCharArray(buffer, position, 0, insertLen)
-        target.toCharArray(buffer, position + insertLen, position, targetLen)
-        return String(buffer)
+
+        btn_raddeg.text = string
     }
 
     // Extension functions/properties
